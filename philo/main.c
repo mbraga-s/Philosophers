@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/11 17:03:14 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:29:10 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	init_data(int argc, char **argv)
 		data()->num_has_eat = ft_atoi(argv[5]);
 	else
 		data()->num_has_eat = 0;
+	data()->start = gettime();
 }
 
 int	main(int argc, char **argv)

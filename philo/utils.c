@@ -6,12 +6,13 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/11 16:59:53 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:45:15 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+//Checks for any other character besides digits
 int	ft_strdigit(char *str)
 {
 	if (!str)
@@ -47,4 +48,17 @@ long	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (nbr * sign);
+}
+
+//Multiply tv_sec by 10^3 and tv_usec (microsec) by 10^-3 to convert to milisec
+time_t	gettime(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+	{
+		write (2, "Error retriving time\n", 21);
+		return (0);
+	}
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
