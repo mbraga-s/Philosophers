@@ -6,12 +6,14 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:11:07 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 19:46:28 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:03:13 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+//Eating action for a philosopher.
+//Picks up forks (locks), eats (waits), then puts them down (unlocks).
 void	eat(t_philos *philo)
 {
 	int	i;
@@ -33,15 +35,25 @@ void	eat(t_philos *philo)
 	pthread_mutex_unlock(&data()->forks[j]);
 }
 
+//Sleeping action for a philosopher.
+//Sleeps for time_to_sleep amount of time (millisec).
 void	sleeping(t_philos *philo)
 {
 	print_action(philo, 2);
 	usleep(data()->time_sleep * 1000);
 }
 
+//Think action for a philosopher.
+//Basically just a printf.
 void	think(t_philos *philo)
 {
 	print_action(philo, 3);
+}
+
+//Checks whether philosopher is dead or 
+int	wellness_check(t_philos *philos)
+{
+	
 }
 
 void	*routine(void *philos)
@@ -57,8 +69,11 @@ void	*routine(void *philos)
 	}
 	if (philo->id % 2 != 0)
 		usleep(1000);
-	eat(philo);
-	sleeping(philo);
-	think(philo);
+	while (!wellness_check(philos))
+	{
+		eat(philo);
+		sleeping(philo);
+		think(philo);
+	}
 	return (NULL);
 }
