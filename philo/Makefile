@@ -6,13 +6,13 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/11 16:30:40 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/03/12 15:36:58 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/03/12 19:16:01 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = main utils init
+SRCS = main utils init threads routine
 
 LIB = $(NAME).a
 

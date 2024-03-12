@@ -6,12 +6,13 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 16:07:39 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:15:36 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+//Calls the static data structure.
 t_data	*data(void)
 {
 	static t_data	data;
@@ -33,6 +34,9 @@ void	free_all(void)
 	free(data()->philos);
 }
 
+//Checks the input provided for letters, values above/below INT MAX and MIN
+//and for negative numbers or zero.
+//Returns 0 on sucess and 1 if an error is found.
 int	checker(int argc, char **argv)
 {
 	int	i;
@@ -59,20 +63,11 @@ int	checker(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	int		i;
-
-	i = 1;
 	if (checker(argc, argv))
 		return (1);
 	init_data(argc, argv);
 	if (init_philos())
-	{
-		while (argv[i])
-		{
-			printf("%s\n", argv[i]);
-			i++;
-		}
-	}
+		threading();
 	free_all();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 16:07:16 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:15:07 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ void	init_data(int argc, char **argv);
 
 int		init_philos(void);
 
+//routine.c
+
+void	*routine(void *philos);
+
+//threads.c
+
+void	threading(void);
+
 //utils.c
 
 long	ft_atoi(const char *nptr);
@@ -60,5 +68,7 @@ long	ft_atoi(const char *nptr);
 int		ft_strdigit(char *str);
 
 time_t	gettime(void);
+
+void	print_action(t_philos *philo, int code);
 
 #endif

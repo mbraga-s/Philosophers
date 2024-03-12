@@ -6,12 +6,13 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:19:09 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 16:08:31 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:35:10 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+//Initializes the data structure.
 void	init_data(int argc, char **argv)
 {
 	data()->num_philos = ft_atoi(argv[1]);
@@ -27,6 +28,8 @@ void	init_data(int argc, char **argv)
 	data()->start = gettime();
 }
 
+//Allocates (and initializes) the philosophers and the forks.
+//Returns 1 on success and 0 on error.
 int	init_philos(void)
 {
 	int	i;
