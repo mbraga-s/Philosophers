@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/11 18:29:10 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:07:39 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ t_data	*data(void)
 	static t_data	data;
 
 	return (&data);
+}
+
+void	free_all(void)
+{
+	int	i;
+
+	i = 0;
+	while (data()->num_philos > i)
+	{
+		pthread_mutex_destroy(&data()->forks[i]);
+		i++;
+	}
+	free(data()->forks);
+	free(data()->philos);
 }
 
 int	checker(int argc, char **argv)
@@ -32,7 +46,7 @@ int	checker(int argc, char **argv)
 	while (argv[i])
 	{
 		if (ft_strdigit(argv[i]) || ft_atoi(argv[i]) > INT_MAX
-			|| ft_atoi(argv[i]) < INT_MIN || ft_atoi(argv[i]) < 0)
+			|| ft_atoi(argv[i]) < INT_MIN || ft_atoi(argv[i]) <= 0)
 		{
 			write(2, "Invalid arguments\n", 18);
 			return (1);
@@ -43,19 +57,6 @@ int	checker(int argc, char **argv)
 
 }
 
-void	init_data(int argc, char **argv)
-{
-	data()->num_philos = ft_atoi(argv[1]);
-	data()->time_die = ft_atoi(argv[2]);
-	data()->time_eat = ft_atoi(argv[3]);
-	data()->time_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		data()->num_has_eat = ft_atoi(argv[5]);
-	else
-		data()->num_has_eat = 0;
-	data()->start = gettime();
-}
-
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -64,10 +65,14 @@ int	main(int argc, char **argv)
 	if (checker(argc, argv))
 		return (1);
 	init_data(argc, argv);
-	while (argv[i])
+	if (init_philos())
 	{
-		printf("%s\n", argv[i]);
-		i++;
+		while (argv[i])
+		{
+			printf("%s\n", argv[i]);
+			i++;
+		}
 	}
+	free_all();
 	return (0);
 }
