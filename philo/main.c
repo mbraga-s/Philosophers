@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 17:11:27 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:35:39 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int	main(int argc, char **argv)
 	if (checker(argc, argv))
 		return (1);
 	init_data(argc, argv);
-	if (init_philos())
-		threading();
+	if (!init_philos())
+		return (1);
+	threading();
 	free_all();
 	return (0);
 }

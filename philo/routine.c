@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:11:07 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 18:01:30 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:49:26 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,27 @@
 //Picks up forks (locks), eats (waits), then puts them down (unlocks).
 void	eat(t_philos *philo)
 {
-	int	i;
-	int	j;
-
-	i = philo->id - 1;
-	j = i + 1;
-	pthread_mutex_lock(&data()->forks[i]);
 	if (philo->id == data()->num_philos)
-		j = 0;
-	pthread_mutex_lock(&data()->forks[j]);
-	print_action(philo, 0);
-	print_action(philo, 0);
-	print_action(philo, 1);
-	pthread_mutex_lock(&data()->eaten);
-	philo->last_eat = (gettime() - data()->start);
-	philo->n_eaten++;
-	pthread_mutex_unlock(&data()->eaten);
-	usleep(data()->time_eat * 1000);
-	pthread_mutex_unlock(&data()->forks[i]);
-	pthread_mutex_unlock(&data()->forks[j]);
+	{
+		pthread_mutex_lock(&data()->forks[0]);
+		pthread_mutex_lock(&data()->forks[philo->id - 1]);
+	}
+	else
+	{
+		pthread_mutex_lock(&data()->forks[philo->id - 1]);
+		pthread_mutex_lock(&data()->forks[philo->id]);
+	}
+	eat_bits(philo);
+	if (philo->id == data()->num_philos)
+	{
+		pthread_mutex_unlock(&data()->forks[philo->id - 1]);
+		pthread_mutex_unlock(&data()->forks[0]);
+	}
+	else
+	{
+		pthread_mutex_unlock(&data()->forks[philo->id]);
+		pthread_mutex_unlock(&data()->forks[philo->id - 1]);
+	}
 }
 
 //Sleeping action for a philosopher.
@@ -86,6 +88,7 @@ void	*routine(void *philos)
 		usleep(1000 * data()->num_philos);
 	while (1)
 	{
+		usleep(100);
 		if (!routine_loop(philo))
 			return (NULL);
 	}

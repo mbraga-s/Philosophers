@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:19:09 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 16:46:34 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:28:31 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	init_philos(void)
 	if (!data()->philos)
 		return (0);
 	data()->forks = malloc(data()->num_philos * sizeof(pthread_mutex_t));
-	if (!data()->philos)
+	if (!data()->forks)
 		return (0);
 	while (i < data()->num_philos)
 	{

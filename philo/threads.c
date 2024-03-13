@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:06:50 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 16:49:55 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:43:53 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 //Flips the dead flag when a philosopher dies and prints appropriate msg.
 void	philo_byebye(int i)
 {
-	if (data()->dead || data()->flag)
-		return ;
 	pthread_mutex_lock(&data()->death);
+	pthread_mutex_lock(&data()->eaten);
+	if (data()->dead || data()->flag)
+	{
+		pthread_mutex_unlock(&data()->death);
+		pthread_mutex_unlock(&data()->eaten);
+		return ;
+	}
 	data()->dead = 1;
 	printf("\e[1;35m%ld	\e[1;32m%d \e[0mdied\n",
 		(gettime() - data()->start), (data()->philos)[i].id);
 	pthread_mutex_unlock(&data()->death);
+	pthread_mutex_unlock(&data()->eaten);
 }
 
 //Checks if all philosophers have eaten at least the

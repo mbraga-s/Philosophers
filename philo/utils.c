@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 18:00:21 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:47:16 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ void	print_action(t_philos *philo, int code)
 {
 	long	current;
 
-	current = gettime() - data()->start;
 	pthread_mutex_lock(&data()->writing);
+	current = gettime() - data()->start;
+	pthread_mutex_lock(&data()->death);
+	pthread_mutex_lock(&data()->eaten);
 	if (!data()->dead && !data()->flag)
 	{
 		printf("\e[1;35m%ld	\e[1;32m%d \e[0m", current, philo->id);
@@ -89,6 +91,8 @@ void	print_action(t_philos *philo, int code)
 		else if (code == 4)
 			printf("died\n");
 	}
+	pthread_mutex_unlock(&data()->death);
+	pthread_mutex_unlock(&data()->eaten);
 	pthread_mutex_unlock(&data()->writing);
 }
 
