@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 12:06:00 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:54:35 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_action(t_philos *philo, int code)
 	pthread_mutex_lock(&data()->writing);
 	if (!data()->dead && !data()->flag)
 	{
-		printf("%ld	%d ", current, philo->id);
+		printf("\e[0;30m%ld	\e[1;32m%d \e[0m", current, philo->id);
 		if (code == 0)
 			printf("has taken a fork\n");
 		else if (code == 1)

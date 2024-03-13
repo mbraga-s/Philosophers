@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 12:01:13 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:24:15 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int		init_philos(void);
 
 void	*routine(void *philos);
 
-void	wellness_check(void);
-
 //threads.c
+
+void	wellness_check(void);
 
 void	threading(void);
 

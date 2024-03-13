@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:11:07 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 12:29:58 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:20:43 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,36 +52,6 @@ void	think(t_philos *philo)
 	print_action(philo, 3);
 }
 
-//Checks whether philosophers are dead or have all eaten
-//num_has_eat times.
-void	wellness_check(void)
-{
-	int		i;
-	time_t	current;
-
-	while (data()->dead != 0 && !data()->flag)
-	{
-		i = 0;
-		while (i < data()->num_philos)
-		{
-			current = gettime() - data()->start;
-			pthread_mutex_lock(&data()->eaten);
-			if (current >= ((data()->philos)[i].last_eat + data()->time_die))
-			{
-				pthread_mutex_unlock(&data()->eaten);
-				pthread_mutex_lock(&data()->death);
-				data()->dead = 1;
-				printf("%ld	%d died.\n",
-					(gettime() - data()->start), (data()->philos)[i].id);
-				pthread_mutex_unlock(&data()->death);
-			}
-			else
-				pthread_mutex_unlock(&data()->eaten);
-			i++;
-		}
-	}
-}
-
 //Runs the philosophers routine until someone dies
 void	*routine(void *philos)
 {
@@ -99,13 +69,8 @@ void	*routine(void *philos)
 	while (1)
 	{
 		usleep(100);
-		pthread_mutex_lock(&data()->death);
-		if (data()->dead != 0)
-		{
-			pthread_mutex_unlock(&data()->death);
+		if (data()->dead || data()->flag)
 			return (NULL);
-		}
-		pthread_mutex_unlock(&data()->death);
 		eat(philo);
 		sleeping(philo);
 		think(philo);
