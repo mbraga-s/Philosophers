@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 19:15:07 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:01:13 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ typedef struct s_data
 	int				time_eat;
 	int				time_sleep;
 	int				num_has_eat;
-	int				death;
+	int				dead;
 	int				flag;
 	t_philos		*philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	writing;
+	pthread_mutex_t	death;
+	pthread_mutex_t	eaten;
 	time_t			start;
 }				t_data;
 
@@ -56,6 +59,8 @@ int		init_philos(void);
 //routine.c
 
 void	*routine(void *philos);
+
+void	wellness_check(void);
 
 //threads.c
 

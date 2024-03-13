@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 19:15:36 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:05:34 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	free_all(void)
 	int	i;
 
 	i = 0;
+	pthread_mutex_destroy(&data()->writing);
+	pthread_mutex_destroy(&data()->death);
+	pthread_mutex_destroy(&data()->eaten);
 	while (data()->num_philos > i)
 	{
 		pthread_mutex_destroy(&data()->forks[i]);

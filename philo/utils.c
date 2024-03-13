@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 19:54:51 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:06:00 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,20 @@ void	print_action(t_philos *philo, int code)
 	long	current;
 
 	current = gettime() - data()->start;
-	printf("%ld	%d ", current, philo->id);
-	if (code == 0)
-		printf("has taken a fork\n");
-	else if (code == 1)
-		printf("is eating\n");
-	else if (code == 2)
-		printf("is sleeping\n");
-	else if (code == 3)
-		printf("is thinking\n");
-	else if (code == 4)
-		printf("died\n");
+	pthread_mutex_lock(&data()->writing);
+	if (!data()->dead && !data()->flag)
+	{
+		printf("%ld	%d ", current, philo->id);
+		if (code == 0)
+			printf("has taken a fork\n");
+		else if (code == 1)
+			printf("is eating\n");
+		else if (code == 2)
+			printf("is sleeping\n");
+		else if (code == 3)
+			printf("is thinking\n");
+		else if (code == 4)
+			printf("died\n");
+	}
+	pthread_mutex_unlock(&data()->writing);
 }

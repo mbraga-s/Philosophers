@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:19:09 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/12 16:35:10 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:01:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ void	init_data(int argc, char **argv)
 	data()->time_die = ft_atoi(argv[2]);
 	data()->time_eat = ft_atoi(argv[3]);
 	data()->time_sleep = ft_atoi(argv[4]);
-	data()->death = 0;
+	data()->dead = 0;
 	data()->flag = 0;
 	if (argc == 6)
 		data()->num_has_eat = ft_atoi(argv[5]);
 	else
 		data()->num_has_eat = 0;
 	data()->start = gettime();
+	pthread_mutex_init(&data()->writing, NULL);
+	pthread_mutex_init(&data()->death, NULL);
+	pthread_mutex_init(&data()->eaten, NULL);
 }
 
 //Allocates (and initializes) the philosophers and the forks.
