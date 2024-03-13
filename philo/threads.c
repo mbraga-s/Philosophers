@@ -19,7 +19,7 @@ void	philo_byebye(int i)
 		return ;
 	pthread_mutex_lock(&data()->death);
 	data()->dead = 1;
-	printf("\e[0;30m%ld	\e[1;32m%d \e[0mdied\n",
+	printf("\e[1;35m%ld	\e[1;32m%d \e[0mdied\n",
 		(gettime() - data()->start), (data()->philos)[i].id);
 	pthread_mutex_unlock(&data()->death);
 }

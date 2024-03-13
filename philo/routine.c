@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:11:07 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 17:14:53 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:01:30 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void	*routine(void *philos)
 	philo = (t_philos *)philos;
 	if (data()->num_philos == 1)
 	{
-		usleep(data()->time_die * 1000);
-		print_action(philo, 4);
+		lone_philos(philos);
 		return (NULL);
 	}
 	if (philo->id % 2 != 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 16:46:11 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:01:04 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ int		ft_strdigit(char *str);
 time_t	gettime(void);
 
 void	print_action(t_philos *philo, int code);
+
+void	lone_philos(t_philos *philo);
 
 #endif

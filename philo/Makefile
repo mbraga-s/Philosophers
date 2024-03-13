@@ -17,7 +17,7 @@ SRCS = main utils init threads routine
 LIB = $(NAME).a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 RM = rm -fr
 

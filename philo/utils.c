@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:43:29 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 15:54:35 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:00:21 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_action(t_philos *philo, int code)
 	pthread_mutex_lock(&data()->writing);
 	if (!data()->dead && !data()->flag)
 	{
-		printf("\e[0;30m%ld	\e[1;32m%d \e[0m", current, philo->id);
+		printf("\e[1;35m%ld	\e[1;32m%d \e[0m", current, philo->id);
 		if (code == 0)
 			printf("has taken a fork\n");
 		else if (code == 1)
@@ -90,4 +90,17 @@ void	print_action(t_philos *philo, int code)
 			printf("died\n");
 	}
 	pthread_mutex_unlock(&data()->writing);
+}
+
+//Makes the lone philosopher pick up a fork and then wait to die
+void	lone_philos(t_philos *philo)
+{
+	int	i;
+
+	i = philo->id - 1;
+	pthread_mutex_lock(&data()->forks[i]);
+	print_action(philo, 0);
+	pthread_mutex_unlock(&data()->forks[i]);
+	usleep(data()->time_die * 1000);
+	print_action(philo, 4);
 }
