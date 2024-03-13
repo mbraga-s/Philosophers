@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:34 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 16:46:04 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:11:27 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	checker(int argc, char **argv)
 		i++;
 	}
 	return (0);
-
 }
 
 int	main(int argc, char **argv)

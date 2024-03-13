@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:11:07 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 16:50:44 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:14:53 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@ void	think(t_philos *philo)
 	print_action(philo, 3);
 }
 
+//The actual routine
+int	routine_loop(t_philos *philo)
+{
+	pthread_mutex_lock(&data()->death);
+	pthread_mutex_lock(&data()->eaten);
+	if (data()->dead || data()->flag)
+	{
+		pthread_mutex_unlock(&data()->death);
+		pthread_mutex_unlock(&data()->eaten);
+		return (0);
+	}
+	pthread_mutex_unlock(&data()->death);
+	pthread_mutex_unlock(&data()->eaten);
+	eat(philo);
+	sleeping(philo);
+	think(philo);
+	return (1);
+}
+
 //Runs the philosophers routine until someone dies
 void	*routine(void *philos)
 {
@@ -68,12 +87,8 @@ void	*routine(void *philos)
 		usleep(1000 * data()->num_philos);
 	while (1)
 	{
-		//usleep(100);
-		if (data()->dead || data()->flag)
+		if (!routine_loop(philo))
 			return (NULL);
-		eat(philo);
-		sleeping(philo);
-		think(philo);
 	}
 	return (NULL);
 }
