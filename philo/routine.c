@@ -6,7 +6,7 @@
 /*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:11:07 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 16:20:43 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:50:44 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*routine(void *philos)
 		usleep(1000 * data()->num_philos);
 	while (1)
 	{
-		usleep(100);
+		//usleep(100);
 		if (data()->dead || data()->flag)
 			return (NULL);
 		eat(philo);

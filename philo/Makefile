@@ -6,7 +6,7 @@
 #    By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/11 16:30:40 by mbraga-s          #+#    #+#              #
-#    Updated: 2024/03/13 16:01:41 by mbraga-s         ###   ########.fr        #
+#    Updated: 2024/03/13 16:52:53 by mbraga-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = main utils init threads routine
 LIB = $(NAME).a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 RM = rm -fr
 
