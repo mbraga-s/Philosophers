@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbraga-s <mbraga-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbraga-s <mbraga-s@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:28:38 by mbraga-s          #+#    #+#             */
-/*   Updated: 2024/03/13 20:48:51 by mbraga-s         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:07:49 by mbraga-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <pthread.h>
 # include <limits.h>
 # include <sys/time.h>
+
+//# define malloc(x) NULL
+// forces malloc to fail by defining the function as NULL
 
 typedef struct s_philos
 {
